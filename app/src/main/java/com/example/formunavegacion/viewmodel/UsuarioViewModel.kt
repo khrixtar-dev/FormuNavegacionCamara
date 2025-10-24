@@ -48,12 +48,13 @@ class UsuarioViewModel: ViewModel() {
         val errores = UsuarioErrores(
             nombre = if (f.nombre.isBlank()) "nombre esta vacio" else null,
             correo = if (f.correo.isBlank() || !f.correo.contains("@")) "error correo" else null,
-            password = if (f.password.isBlank()) "pass vacia" else null
+            password = if (f.password.isBlank()) "pass vacia" else null,
+            aceptarTerminos = if (f.aceptarTerminos==false)"debe aceptar los terminos" else null
         )
         _usuario.update {
             it.copy(errores = errores)
         }
-        if (errores.nombre !=null && errores.correo!=null ){
+        if (errores.nombre ==null && errores.correo ==null && errores.password==null && errores.aceptarTerminos==null){
             return  true
         } else{
             return  false

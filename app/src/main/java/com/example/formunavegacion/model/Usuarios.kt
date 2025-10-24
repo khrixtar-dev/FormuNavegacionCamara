@@ -13,5 +13,6 @@ data class Usuarios(
 data class UsuarioErrores(
     val nombre: String? = null,
     val correo: String? = null,
-    val password: String? = null
+    val password: String? = null,
+    val aceptarTerminos: String? = null
 )

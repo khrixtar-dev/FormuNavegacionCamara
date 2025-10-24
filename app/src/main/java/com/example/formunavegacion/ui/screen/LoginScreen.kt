@@ -21,12 +21,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.formunavegacion.viewmodel.UsuarioViewModel
 
 @Composable
 fun LoginScreen(
-    viewModel: UsuarioViewModel
+    viewModel: UsuarioViewModel,
+    navController: NavController
 ) {
     val usuario by viewModel.usuario.collectAsState();
 
@@ -64,6 +67,7 @@ fun LoginScreen(
             onValueChange = viewModel::onChangePassword,
             label = { Text("password") },
             isError = usuario.errores.password!=null,
+            visualTransformation = PasswordVisualTransformation(),
             supportingText = {
                 usuario.errores.password?.let {
                     Text(it, color = MaterialTheme.colorScheme.error)
@@ -83,6 +87,7 @@ fun LoginScreen(
             onClick = {
                 if ( viewModel.validar()){
                     Toast.makeText(contexto, "Ingresaste", Toast.LENGTH_SHORT).show()
+                    navController.navigate(route = "bienvenida")
                 } else {
                     Toast.makeText(contexto, "No ingresaste", Toast.LENGTH_SHORT).show()
                 }
